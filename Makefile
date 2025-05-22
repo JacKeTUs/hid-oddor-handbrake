@@ -10,3 +10,9 @@ clean:
 install: default
 	$(MAKE) -C $(KDIR) M=$$PWD modules_install
 	depmod -A
+
+unload:
+	rmmod hid_oddor_handbrake;
+
+load: unload
+	insmod hid_oddor_handbrake.ko
