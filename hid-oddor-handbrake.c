@@ -19,17 +19,9 @@ static int oddor_input_mapping(struct hid_device *hdev, struct hid_input *hi,
 		struct hid_field *field, struct hid_usage *usage,
 		unsigned long **bit, int *max)
 {
-    input_set_capability(hi->input, EV_KEY, BTN_JOYSTICK);
-    return 0;
-}
-
-static int oddor_event(struct hid_device *hdev, struct hid_field *field,
-		struct hid_usage *usage, __s32 value)
-{
-	if (usage->type == EV_KEY) {
-        // Ignore all button inputs
-		return 1;
-	}
+    if ((usage->hid & HID_USAGE_PAGE) == HID_UP_BUTTON) {
+        return -1;
+    }
     return 0;
 }
 
@@ -38,13 +30,13 @@ static const struct hid_device_id oddor_devices[] = {
 	{ HID_USB_DEVICE(USB_VENDOR_ID_ODDOR, USB_PRODUCT_ID_ODDOR_HANDBRAKE) },
 	{ }
 };
+
 MODULE_DEVICE_TABLE(hid, oddor_devices);
 
 static struct hid_driver oddor_driver = {
 	.name = "hid-oddor",
 	.id_table = oddor_devices,
     .input_mapping = oddor_input_mapping,
-    .event = oddor_event,
 };
 module_hid_driver(oddor_driver);
 
