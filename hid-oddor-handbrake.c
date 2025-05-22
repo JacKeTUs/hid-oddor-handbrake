@@ -11,7 +11,7 @@
 #include <linux/module.h>
 #include <linux/usb.h>
 
-#define USB_VENDOR_ID_ODDOR               0x1201
+#define USB_VENDOR_ID_ODDOR               0x1021
 #define USB_PRODUCT_ID_ODDOR_HANDBRAKE    0x1888
 
 static int oddor_input_mapping(struct hid_device *hdev, struct hid_input *hi,
