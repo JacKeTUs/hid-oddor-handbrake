@@ -14,5 +14,5 @@ install: default
 unload:
 	rmmod hid_oddor_handbrake;
 
-load: unload
+load:
 	insmod hid_oddor_handbrake.ko
