@@ -19,11 +19,7 @@ static int oddor_input_mapping(struct hid_device *hdev, struct hid_input *hi,
 		struct hid_field *field, struct hid_usage *usage,
 		unsigned long **bit, int *max)
 {
-    // Map all buttons to BTN_JOYSTICK, for detection
-    if ((usage->hid & HID_USAGE_PAGE) == HID_UP_BUTTON ) {
-        hid_map_usage_clear(hi, usage, bit, max, EV_KEY, BTN_JOYSTICK);
-        return 1;
-    }
+    input_set_capability(hi->input, EV_KEY, BTN_JOYSTICK);
     return 0;
 }
 
